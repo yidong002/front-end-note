@@ -977,6 +977,7 @@ function workLoopConcurrent() {
 
 - 在Commit阶段,React将Render阶段生成的更新应用到真实的DOM中,完成页面的渲染。
 - 在Commit阶段,React可能会执行一些其他操作,比如调用生命周期方法(如`componentDidMount`、`componentDidUpdate`等)或执行其他副作用。
+- 切换到新的Fiber树,将current指针指向新的Fiber树。
 
 **重复步骤2-7:**
 
@@ -1049,7 +1050,10 @@ function workLoopConcurrent() {
   ├─ 提交阶段
   └─ 副作用处理
 ```
-
+- createContainer -**> hostRootFiber  -**> updateQueue  返回<**FiberRootNode
+- FiberRootNode -**> hostRootFiber -**> updateQueue -**>
+- createUpdate(element) -**> 状态更新 -**> scheduleUpdateOnFiber 
+- **>markUpdateFromFiberToRoot  -**> renderRoot -**> prepareFreshStack -**> - - -  - createWorkInProgress -**> 第⼀次 mount阶段 -> 
 ---
 
 ### Fiber架构原理你能细致描述下么?
